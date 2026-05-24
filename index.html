@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CDO Panamá — Mapa del proyecto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css" />
+<style>
+  body { background: var(--cream); min-height: 100vh; }
+
+  .hub {
+    padding: 64px 0 96px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hub .d1 { position: absolute; width: 220px; height: 220px; border-radius: 50%; background: var(--orange); top: -60px; right: -40px; opacity: .14; }
+  .hub .d2 { position: absolute; width: 120px; height: 120px; border-radius: 50%; background: var(--sun); bottom: 100px; left: -40px; opacity: .8; }
+
+  .hub-head { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: end; margin-bottom: 56px; }
+  .hub-head h1 { font-family: var(--font-display); font-weight: 500; font-size: clamp(48px, 6vw, 80px); letter-spacing: -0.035em; line-height: 0.98; }
+  .hub-head h1 .accent { color: var(--orange); font-style: italic; font-weight: 400; }
+  .hub-head .meta { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .hub-head .meta .stat {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .hub-head .meta .stat::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--orange);
+  }
+  .hub-head .meta .stat.indigo::before { background: var(--indigo); }
+  .hub-head .meta .stat.sun::before { background: var(--sun); }
+
+  .hub-cards {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+  }
+  .hub-card {
+    grid-column: span 6;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: transform .2s ease, box-shadow .2s ease;
+    position: relative;
+  }
+  .hub-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .hub-card .thumb {
+    aspect-ratio: 16/10;
+    background: var(--cream-2);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .hub-card .thumb iframe {
+    width: 1240px;
+    height: 775px;
+    border: 0;
+    transform: scale(0.42);
+    transform-origin: top left;
+    background: var(--cream);
+    pointer-events: none;
+  }
+  .hub-card .badge-tag {
+    position: absolute;
+    top: 16px; left: 16px;
+    background: var(--white);
+    border-radius: var(--r-pill);
+    padding: 6px 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    box-shadow: var(--shadow-sm);
+    z-index: 2;
+  }
+  .hub-card.featured .badge-tag { background: var(--orange); color: var(--white); }
+
+  .hub-card .body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+  .hub-card .num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+  }
+  .hub-card h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    margin-top: 6px;
+  }
+  .hub-card p { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
+  .hub-card .foot {
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px dashed var(--line);
+  }
+  .hub-card .foot .filename {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--indigo);
+    letter-spacing: 0.04em;
+  }
+  .hub-card .foot .open {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--orange);
+  }
+
+  .hub-card.featured {
+    grid-column: span 12;
+    background: var(--indigo);
+    color: var(--white);
+    border-color: var(--indigo);
+  }
+  .hub-card.featured .body { color: var(--white); }
+  .hub-card.featured h3 { color: var(--white); font-size: 32px; }
+  .hub-card.featured .num { color: var(--sun); }
+  .hub-card.featured p { color: rgba(255,255,255,.78); max-width: 60ch; font-size: 16px; }
+  .hub-card.featured .foot { border-top-color: rgba(255,255,255,.14); }
+  .hub-card.featured .foot .filename { color: var(--sun); }
+  .hub-card.featured .foot .open { color: var(--orange); }
+
+  /* Variantes hero más pequeñas */
+  .hub-card.small { grid-column: span 4; }
+  .hub-card.small .thumb { aspect-ratio: 4/3; }
+  .hub-card.small h3 { font-size: 19px; }
+
+  .hub-section {
+    margin-top: 64px;
+    padding-top: 36px;
+    border-top: 1px solid var(--line);
+  }
+  .hub-section h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+  }
+  .hub-section p {
+    color: var(--muted);
+    font-size: 16px;
+    margin-top: 8px;
+    max-width: 56ch;
+  }
+  .hub-section .head-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* Footer-ish */
+  .hub-foot {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  @media (max-width: 980px) {
+    .hub-head { grid-template-columns: 1fr; }
+    .hub-card, .hub-card.featured, .hub-card.small { grid-column: span 12; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hub">
+  <span class="d1"></span><span class="d2"></span>
+  <div class="container">
+
+    <div class="row row-between" style="margin-bottom: 48px;">
+      <a class="logo" href="#" style="text-decoration: none; color: var(--ink);">
+        <span class="logo-mark"><span>CDO</span></span>
+        <span class="logo-text">
+          <strong>Clínicas de Ortodoncia</strong>
+          <small>de Panamá · Mapa del proyecto</small>
+        </span>
+      </a>
+      <a class="btn btn-primary" href="pages/inicio.html">Abrir sitio en vivo <span class="arrow">→</span></a>
+    </div>
+
+    <div class="hub-head">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 18px;">Entrega del proyecto · Mayo 2026</div>
+        <h1>Una sonrisa<br/><span class="accent">amable</span> en cuatro páginas.</h1>
+      </div>
+      <div class="meta">
+        <div class="stat">4 páginas en el sitio</div>
+        <div class="stat indigo">3 variaciones del hero</div>
+        <div class="stat sun">1 sistema visual compartido</div>
+      </div>
+    </div>
+
+    <!-- Featured: el sitio completo -->
+    <div class="hub-cards">
+      <a class="hub-card featured" href="pages/inicio.html">
+        <div class="thumb">
+          <span class="badge-tag">Sitio en vivo</span>
+          <iframe src="pages/inicio.html" loading="lazy" tabindex="-1"></iframe>
+        </div>
+        <div class="body">
+          <span class="num">00 · El sitio</span>
+          <h3>Inicio + Servicios + Equipo + Contacto</h3>
+          <p>Cuatro páginas conectadas con el mismo sistema visual: naranja vibrante, índigo profundo, motivo de círculos y un tono cercano. Empieza por la portada y navega normalmente.</p>
+          <div class="foot">
+            <span class="filename">pages/inicio.html</span>
+            <span class="open">Abrir portada →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Páginas individuales -->
+      <a class="hub-card" href="pages/servicios.html">
+        <div class="thumb">
+          <span class="badge-tag">Página</span>
+          <iframe src="pages/servicios.html" loading="lazy" tabindex="-1"></iframe>
+        </div>
+        <div class="body">
+          <span class="num">01 / 04</span>
+          <h3>Servicios</h3>
+          <p>Tres servicios detallados con galería, comparativa y FAQ. Cada bloque tiene precio orientativo y CTA propio.</p>
+          <div class="foot">
+            <span class="filename">pages/servicios.html</span>
+            <span class="open">Abrir →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="hub-card" href="pages/equipo.html">
+        <div class="thumb">
+          <span class="badge-tag">Página</span>
+          <iframe src="pages/equipo.html" loading="lazy" tabindex="-1"></iframe>
+        </div>
+        <div class="body">
+          <span class="num">02 / 04</span>
+          <h3>Equipo</h3>
+          <p>Mosaico editorial con la directora destacada y siete miembros más. Filosofía expresada como acuerdos con el paciente.</p>
+          <div class="foot">
+            <span class="filename">pages/equipo.html</span>
+            <span class="open">Abrir →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="hub-card" href="pages/contacto.html">
+        <div class="thumb">
+          <span class="badge-tag">Página</span>
+          <iframe src="pages/contacto.html" loading="lazy" tabindex="-1"></iframe>
+        </div>
+        <div class="body">
+          <span class="num">03 / 04</span>
+          <h3>Contacto</h3>
+          <p>Formulario con chips de servicio y franja horaria, panel lateral con WhatsApp y línea de guardia, mapa por sucursal con tabs.</p>
+          <div class="foot">
+            <span class="filename">pages/contacto.html</span>
+            <span class="open">Abrir →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="hub-card" href="pages/inicio.html">
+        <div class="thumb">
+          <span class="badge-tag">Página</span>
+          <iframe src="pages/inicio.html" loading="lazy" tabindex="-1"></iframe>
+        </div>
+        <div class="body">
+          <span class="num">04 / 04</span>
+          <h3>Inicio</h3>
+          <p>Hero con stats, pleca de confianza, tres servicios, proceso en cuatro pasos, equipo, ubicación y CTA final con formulario rápido.</p>
+          <div class="foot">
+            <span class="filename">pages/inicio.html</span>
+            <span class="open">Abrir →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Variaciones del hero -->
+    <div class="hub-section">
+      <div class="head-row">
+        <div>
+          <h2>Variaciones del hero</h2>
+          <p>Tres direcciones para la apertura — útil para A/B testing o para reusar una de ellas como landing de campaña.</p>
+        </div>
+        <a class="btn btn-indigo" href="variaciones.html">Ver lado a lado en canvas <span class="arrow">→</span></a>
+      </div>
+
+      <div class="hub-cards">
+        <a class="hub-card small" href="variations/hero-a.html">
+          <div class="thumb">
+            <span class="badge-tag">A · Actual</span>
+            <iframe src="variations/hero-a.html" loading="lazy" tabindex="-1"></iframe>
+          </div>
+          <div class="body">
+            <span class="num">Variante A</span>
+            <h3>Editorial split</h3>
+            <p>El hero que vive hoy en la portada. Foto vertical + chips flotantes con prueba social.</p>
+            <div class="foot">
+              <span class="filename">hero-a.html</span>
+              <span class="open">Abrir →</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="hub-card small" href="variations/hero-b.html">
+          <div class="thumb">
+            <span class="badge-tag">B · Campaña</span>
+            <iframe src="variations/hero-b.html" loading="lazy" tabindex="-1"></iframe>
+          </div>
+          <div class="body">
+            <span class="num">Variante B</span>
+            <h3>Full-bleed naranja</h3>
+            <p>Fondo naranja, mucho corazón. Trae el formulario de reserva al hero con franjas horarias.</p>
+            <div class="foot">
+              <span class="filename">hero-b.html</span>
+              <span class="open">Abrir →</span>
+            </div>
+          </div>
+        </a>
+
+        <a class="hub-card small" href="variations/hero-c.html">
+          <div class="thumb">
+            <span class="badge-tag">C · Editorial</span>
+            <iframe src="variations/hero-c.html" loading="lazy" tabindex="-1"></iframe>
+          </div>
+          <div class="body">
+            <span class="num">Variante C</span>
+            <h3>Magazine</h3>
+            <p>Tipo revista. Tipografía grande con texto contorneado, galería de fotos editorial y un testimonio.</p>
+            <div class="foot">
+              <span class="filename">hero-c.html</span>
+              <span class="open">Abrir →</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="hub-foot">
+      <span>Tipografía Outfit + DM Sans · Paleta naranja-índigo-sol · 2026</span>
+      <span>Estructura: assets/ · pages/ · variations/</span>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>

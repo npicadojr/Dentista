@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hero A — Editorial split</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css" />
+<style>
+  body { background: var(--cream); }
+  .v-hero { padding: 56px 0 80px; position: relative; overflow: hidden; min-height: 760px; }
+  .v-hero .grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .v-hero h1 { font-family: var(--font-display); font-weight: 500; font-size: 80px; line-height: 0.98; letter-spacing: -0.035em; }
+  .v-hero h1 .accent { color: var(--orange); font-style: italic; font-weight: 400; }
+  .v-hero h1 .underline { position: relative; display: inline-block; }
+  .v-hero h1 .underline::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -2px;
+    height: 6px; background: var(--sun); border-radius: 4px; z-index: -1;
+  }
+  .v-hero .eyeb { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+  .v-hero .pulse {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--orange);
+    box-shadow: 0 0 0 0 rgba(241,90,41,.6);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(241,90,41,.5); }
+    70% { box-shadow: 0 0 0 12px rgba(241,90,41,0); }
+    100% { box-shadow: 0 0 0 0 rgba(241,90,41,0); }
+  }
+  .v-hero .lede { font-size: 18px; color: var(--muted); max-width: 50ch; margin-top: 22px; }
+  .v-hero .cta { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+
+  .v-stats { margin-top: 56px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; padding-top: 28px; border-top: 1px solid var(--line); }
+  .v-stats .n { font-family: var(--font-display); font-size: 36px; font-weight: 600; letter-spacing: -0.03em; color: var(--indigo); }
+  .v-stats .lbl { font-size: 13px; color: var(--muted); }
+
+  .v-art { position: relative; aspect-ratio: 5/6; border-radius: var(--r-xl); overflow: hidden; background: var(--indigo); }
+  .v-art .img-ph { position: absolute; inset: 0; aspect-ratio: auto; border-radius: 0;
+    background: repeating-linear-gradient(135deg, rgba(255,255,255,.06) 0 18px, rgba(255,255,255,.02) 18px 36px), var(--indigo);
+    color: rgba(255,255,255,.7);
+  }
+  .v-art .img-ph::after { border-color: rgba(255,255,255,.18); }
+  .chip { position: absolute; background: var(--white); border-radius: var(--r-lg); padding: 16px 18px; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 14px; z-index: 2; }
+  .chip .av { width: 40px; height: 40px; border-radius: 50%; background: var(--orange-soft); display: grid; place-items: center; color: var(--orange-deep); font-weight: 600; font-family: var(--font-display); }
+  .chip strong { font-size: 14px; display: block; }
+  .chip small { font-size: 12px; color: var(--muted); }
+  .chip-rating { bottom: 32px; left: -28px; }
+  .chip-rating .stars { color: var(--sun); letter-spacing: 2px; font-size: 14px; }
+  .chip-booked { top: 48px; right: -28px; }
+  .dot { position: absolute; border-radius: 50%; pointer-events: none; }
+  .v-hero .d1 { width: 120px; height: 120px; background: var(--orange); top: -40px; right: 40%; opacity: .12; }
+  .v-hero .d2 { width: 70px; height: 70px; background: var(--sun); bottom: 20%; left: -10px; }
+  .v-hero .d3 { width: 40px; height: 40px; background: var(--sky); top: 12%; right: -6px; }
+</style>
+</head>
+<body>
+<section class="v-hero">
+  <span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span>
+  <div class="container grid">
+    <div>
+      <div class="eyeb eyebrow"><span class="pulse"></span> Consulta inicial gratuita · 3 sucursales</div>
+      <h1>Sonrisas que <span class="accent">cambian</span><br/>vidas, <span class="underline">a tu ritmo</span>.</h1>
+      <p class="lede">Más de 20 años cuidando la sonrisa de las familias panameñas. Ortodoncia, limpieza y blanqueamiento con un equipo cercano y planes de pago a tu medida.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#">Agendar consulta gratis <span class="arrow">→</span></a>
+        <a class="btn btn-ghost" href="#">Ver servicios</a>
+      </div>
+      <div class="v-stats">
+        <div><div class="n">12,400+</div><div class="lbl">Sonrisas tratadas</div></div>
+        <div><div class="n">4.9★</div><div class="lbl">Calificación de pacientes</div></div>
+        <div><div class="n">3</div><div class="lbl">Sucursales en Panamá</div></div>
+      </div>
+    </div>
+    <div class="v-art">
+      <div class="img-ph"><span>Foto · paciente sonriendo</span></div>
+      <div class="chip chip-rating">
+        <div class="av">A</div>
+        <div><div class="stars">★★★★★</div><small>“Me trataron como familia.”</small></div>
+      </div>
+      <div class="chip chip-booked">
+        <div class="av" style="background:var(--indigo-soft); color:var(--indigo);">✓</div>
+        <div><strong>23 citas hoy</strong><small>Disponibilidad esta semana</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

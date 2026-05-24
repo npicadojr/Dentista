@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Equipo — Clínicas de Ortodoncia de Panamá</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css" />
+<style>
+  /* Hero del equipo */
+  .team-hero { padding: 80px 0 60px; position: relative; overflow: hidden; }
+  .team-hero .dot-a { width: 90px; height: 90px; background: var(--sun); top: 100px; right: 8%; opacity: .9; position: absolute; border-radius: 50%; }
+  .team-hero .dot-b { width: 50px; height: 50px; background: var(--sky); bottom: 40px; left: 12%; opacity: .9; position: absolute; border-radius: 50%; }
+  .team-hero h1 { font-size: clamp(48px, 6vw, 84px); letter-spacing: -0.035em; max-width: 16ch; }
+  .team-hero h1 .accent { color: var(--orange); font-style: italic; font-weight: 400; }
+  .team-hero .lede { margin-top: 22px; font-size: 19px; max-width: 56ch; }
+
+  /* Mosaico del equipo */
+  .team-grid {
+    padding-bottom: 96px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+  }
+  .doc {
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    position: relative;
+    background: var(--cream-2);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+  }
+  .doc .photo {
+    aspect-ratio: 4/5;
+    position: relative;
+    border-bottom: 1px solid var(--line);
+  }
+  .doc .photo .img-ph {
+    position: absolute; inset: 0;
+    aspect-ratio: auto;
+    border-radius: 0;
+  }
+  .doc .photo .img-ph::after { inset: 14px; }
+  .doc .body {
+    padding: 22px 24px 24px;
+  }
+  .doc .role {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+  .doc h3 { font-size: 22px; margin-top: 4px; }
+  .doc .bio { color: var(--muted); font-size: 14px; margin: 10px 0 0; }
+  .doc .meta {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .doc .meta span { display: flex; align-items: center; gap: 6px; }
+  .doc .meta span::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--indigo);
+  }
+
+  /* Doctor destacado */
+  .doc-feature {
+    grid-column: span 7;
+    background: var(--indigo);
+    color: var(--white);
+    border-color: var(--indigo);
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: stretch;
+    overflow: hidden;
+  }
+  .doc-feature .photo {
+    border-bottom: 0;
+    border-right: 1px solid rgba(255,255,255,.1);
+    aspect-ratio: auto;
+  }
+  .doc-feature .photo .img-ph {
+    background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,.06) 0 18px, rgba(255,255,255,.02) 18px 36px),
+      var(--indigo-deep);
+    color: rgba(255,255,255,.7);
+  }
+  .doc-feature .photo .img-ph::after { border-color: rgba(255,255,255,.18); }
+  .doc-feature .body { padding: 40px; display: flex; flex-direction: column; gap: 16px; height: 100%; }
+  .doc-feature .role { color: var(--sun); }
+  .doc-feature h3 { font-size: 36px; color: var(--white); letter-spacing: -0.025em; }
+  .doc-feature .bio { color: rgba(255,255,255,.78); font-size: 16px; }
+  .doc-feature .meta { color: rgba(255,255,255,.85); border-top-color: rgba(255,255,255,.14); }
+  .doc-feature .meta span::before { background: var(--orange); }
+  .doc-feature blockquote {
+    margin: 0;
+    padding: 16px 18px;
+    background: rgba(255,255,255,.06);
+    border-radius: var(--r-md);
+    border-left: 3px solid var(--orange);
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-style: italic;
+    color: rgba(255,255,255,.92);
+  }
+
+  .doc-md  { grid-column: span 5; }
+  .doc-sm  { grid-column: span 4; }
+  .doc-third { grid-column: span 4; }
+
+  /* Filosofía */
+  .filosofia {
+    padding: 96px 0;
+    background: var(--cream-2);
+    border-block: 1px solid var(--line);
+  }
+  .filo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .filo-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .filo-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 28px;
+  }
+  .filo-card .n {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 500;
+    color: var(--orange);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .filo-card h4 { font-size: 19px; margin-top: 16px; }
+  .filo-card p { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
+  .filo-card.indigo { background: var(--indigo); color: var(--white); border-color: var(--indigo); }
+  .filo-card.indigo .n { color: var(--sun); }
+  .filo-card.indigo h4 { color: var(--white); }
+  .filo-card.indigo p { color: rgba(255,255,255,.75); }
+
+  /* Career strip */
+  .career {
+    padding: 64px 0;
+    text-align: center;
+  }
+  .career h2 { font-size: clamp(28px, 3vw, 40px); max-width: 26ch; margin-inline: auto; }
+  .career p { margin-top: 14px; color: var(--muted); font-size: 16px; }
+
+  @media (max-width: 980px) {
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .doc-feature { grid-column: span 2; grid-template-columns: 1fr; }
+    .doc-feature .photo { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.1); aspect-ratio: 4/3; }
+    .doc-md { grid-column: span 2; }
+    .doc-sm, .doc-third { grid-column: span 1; }
+    .filo-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+  @media (max-width: 560px) {
+    .team-grid { grid-template-columns: 1fr; }
+    .doc-feature, .doc-md, .doc-sm, .doc-third { grid-column: span 1; }
+    .filo-values { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header --------------------------------------------------- -->
+<header class="site-header">
+  <div class="container nav">
+    <a class="logo" href="inicio.html">
+      <span class="logo-mark"><span>CDO</span></span>
+      <span class="logo-text"><strong>Clínicas de Ortodoncia</strong><small>de Panamá</small></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="inicio.html">Inicio</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="equipo.html" class="active">Equipo</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="tel:+5070000000" class="nav-phone">+507 000-0000</a>
+      <a href="contacto.html" class="btn btn-primary">Agendar consulta <span class="arrow">→</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- Team hero ------------------------------------------------ -->
+<section class="team-hero">
+  <span class="dot-a"></span>
+  <span class="dot-b"></span>
+  <div class="container">
+    <div class="crumbs" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px;">
+      <a href="inicio.html" style="color: var(--muted); text-decoration: none;">Inicio</a> · Equipo
+    </div>
+    <h1>Las <span class="accent">manos</span> y las sonrisas detrás de cada tratamiento.</h1>
+    <p class="lede">Somos seis ortodoncistas, dos higienistas y un equipo administrativo que se acuerda de tu nombre desde la primera llamada. Esto no es coincidencia — es la única forma en la que sabemos trabajar.</p>
+  </div>
+</section>
+
+<!-- Team grid ------------------------------------------------ -->
+<section class="container">
+  <div class="team-grid">
+
+    <!-- Doctor feature -->
+    <article class="doc doc-feature">
+      <div class="photo">
+        <div class="img-ph"><span>Retrato editorial<br/>Dra. María Elena Quirós<br/>1:1 o 3:4</span></div>
+      </div>
+      <div class="body">
+        <div class="role">Directora médica · Fundadora</div>
+        <h3>Dra. María Elena Quirós</h3>
+        <p class="bio">Ortodoncista certificada con más de 22 años de práctica. Fundó CDO en 2003 con la idea de que la ortodoncia podía ser cercana, sin dejar de ser rigurosa. Posgrado en la Universidad de São Paulo, conferencista en congresos latinoamericanos.</p>
+
+        <blockquote>“Mi trabajo es escuchar primero la sonrisa que ya tienes, y después diseñar la que quieres.”</blockquote>
+
+        <div class="meta">
+          <span>22 años</span>
+          <span>Ortodoncia</span>
+          <span>Univ. Panamá · USP</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="doc doc-md">
+      <div class="photo"><div class="img-ph"><span>Retrato<br/>Dr. Carlos Mendoza</span></div></div>
+      <div class="body">
+        <div class="role">Ortodoncia adultos</div>
+        <h3>Dr. Carlos Mendoza</h3>
+        <p class="bio">Especialista en casos complejos en adultos y rehabilitación post-ortodoncia. Quince años atendiendo gente que pensaba que "ya era tarde" — y demostrándole lo contrario.</p>
+        <div class="meta">
+          <span>15 años</span>
+          <span>Casos complejos</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="doc doc-third">
+      <div class="photo"><div class="img-ph"><span>Retrato<br/>Dra. Ana Lucía Pérez</span></div></div>
+      <div class="body">
+        <div class="role">Odontopediatría</div>
+        <h3>Dra. Ana Lucía Pérez</h3>
+        <p class="bio">Convierte la primera visita al dentista en una aventura. Especialista en niños de 5 a 14 años y ortodoncia interceptiva.</p>
+        <div class="meta">
+          <span>9 años</span>
+          <span>Niños 5+</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="doc doc-third">
+      <div class="photo"><div class="img-ph"><span>Retrato<br/>Dr. Roberto Castillo</span></div></div>
+      <div class="body">
+        <div class="role">Ortodoncia · Damon</div>
+        <h3>Dr. Roberto Castillo</h3>
+        <p class="bio">Certificado en sistema Damon. Le encanta explicar paso a paso lo que está pasando dentro de la boca. Maratonista los fines de semana.</p>
+        <div class="meta">
+          <span>11 años</span>
+          <span>Sistema Damon</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="doc doc-third">
+      <div class="photo"><div class="img-ph"><span>Retrato<br/>Dra. Lourdes Vega</span></div></div>
+      <div class="body">
+        <div class="role">Periodoncia · Limpiezas</div>
+        <h3>Dra. Lourdes Vega</h3>
+        <p class="bio">A cargo del programa de limpiezas y salud gingival. Si te dan miedo las agujas, ella es tu persona.</p>
+        <div class="meta">
+          <span>8 años</span>
+          <span>Encías sensibles</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="doc doc-third">
+      <div class="photo"><div class="img-ph"><span>Retrato<br/>Dr. Javier Núñez</span></div></div>
+      <div class="body">
+        <div class="role">Estética dental</div>
+        <h3>Dr. Javier Núñez</h3>
+        <p class="bio">Lidera nuestro programa de blanqueamiento y carillas. Obsesionado con que el resultado se vea natural — no postizo.</p>
+        <div class="meta">
+          <span>13 años</span>
+          <span>Blanqueamiento</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="doc doc-third">
+      <div class="photo"><div class="img-ph"><span>Retrato<br/>Yiselle Aparicio</span></div></div>
+      <div class="body">
+        <div class="role">Coordinadora de pacientes</div>
+        <h3>Yiselle Aparicio</h3>
+        <p class="bio">La voz que escuchas al llamar. Se acuerda de los cumpleaños de los niños y de cómo te gusta el café.</p>
+        <div class="meta">
+          <span>6 años</span>
+          <span>WhatsApp · Citas</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- Filosofía ------------------------------------------------ -->
+<section class="filosofia">
+  <div class="container filo-grid">
+    <div>
+      <div class="eyebrow">Nuestra filosofía</div>
+      <h2 class="h-1" style="margin-top: 12px;">Cuatro acuerdos que tenemos con cada paciente.</h2>
+      <p class="lede" style="margin-top: 18px;">No son política de la empresa, son acuerdos que firmamos mentalmente cuando alguien nos confía su sonrisa.</p>
+    </div>
+    <div class="filo-values">
+      <div class="filo-card">
+        <div class="n">01</div>
+        <h4>Hablar claro</h4>
+        <p>Nada de tecnicismos disfrazados de cobros. Si no entiendes algo, paramos y lo explicamos otra vez.</p>
+      </div>
+      <div class="filo-card indigo">
+        <div class="n">02</div>
+        <h4>Respetar tu tiempo</h4>
+        <p>Las citas empiezan a la hora. Si llegamos tarde, te invitamos un café (en serio).</p>
+      </div>
+      <div class="filo-card indigo">
+        <div class="n">03</div>
+        <h4>Sin presionar</h4>
+        <p>Te damos el plan, los precios y el espacio para pensarlo. No mandamos mensajes empujando la decisión.</p>
+      </div>
+      <div class="filo-card">
+        <div class="n">04</div>
+        <h4>Estar después</h4>
+        <p>Un año de seguimiento gratuito después del tratamiento, sin importar qué.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Career ------------------------------------------------- -->
+<section class="career">
+  <div class="container">
+    <div class="eyebrow">¿Eres profesional dental?</div>
+    <h2 class="h-1" style="margin-top: 14px;">Siempre estamos buscando manos cuidadosas y curiosas.</h2>
+    <p>Escríbenos a <a href="mailto:gente@ortodonciapanama.com" style="color: var(--orange); text-decoration: none; font-weight: 500;">gente@ortodonciapanama.com</a> con tu CV y dos líneas sobre por qué te gusta esto.</p>
+  </div>
+</section>
+
+<!-- Footer --------------------------------------------------- -->
+<footer class="site-footer">
+  <div class="container">
+    <div>
+      <a class="logo" href="inicio.html" style="color: var(--white);">
+        <span class="logo-mark" style="background: var(--white); color: var(--indigo);"><span>CDO</span></span>
+        <span class="logo-text">
+          <strong style="color: var(--white);">Clínicas de Ortodoncia</strong>
+          <small style="color: rgba(255,255,255,.6);">de Panamá</small>
+        </span>
+      </a>
+      <p style="margin-top: 24px; color: rgba(255,255,255,.7); font-size: 14px; max-width: 32ch;">Cuidando sonrisas panameñas desde 2003. Especialistas en ortodoncia para toda la familia.</p>
+    </div>
+    <div><h4>Sitio</h4><ul><li><a href="inicio.html">Inicio</a></li><li><a href="servicios.html">Servicios</a></li><li><a href="equipo.html">Equipo</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+    <div><h4>Sucursales</h4><ul><li>Costa del Este</li><li>Albrook</li><li>Vía Argentina</li></ul></div>
+    <div><h4>Contacto</h4><ul><li>+507 000-0000</li><li>hola@ortodonciapanama.com</li><li>WhatsApp 6000-0000</li></ul></div>
+    <div class="legal">
+      <span>© 2026 Clínicas de Ortodoncia de Panamá. Todos los derechos reservados.</span>
+      <span>Hecho con cariño en la Ciudad de Panamá</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Variaciones — CDO Panamá</title>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
+  iframe { border: 0; background: white; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const Frame = ({ src }) => (
+  <iframe
+    src={src}
+    style={{ width: '100%', height: '100%', display: 'block', background: '#fbf8f3' }}
+    loading="lazy"
+  />
+);
+
+const PagePreview = ({ src, badge, badgeColor }) => (
+  <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+    <Frame src={src} />
+    {badge && (
+      <div style={{
+        position: 'absolute', top: 14, left: 14, zIndex: 2,
+        background: badgeColor || '#2a2680', color: 'white',
+        fontFamily: '"JetBrains Mono", ui-monospace, monospace',
+        fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase',
+        padding: '6px 10px', borderRadius: 999,
+      }}>{badge}</div>
+    )}
+  </div>
+);
+
+const App = () => (
+  <DesignCanvas>
+    <DCSection
+      id="paginas"
+      title="Sitio completo — 4 páginas"
+      subtitle="Cada cuadro es la página real, navegable. Abre cualquiera a pantalla completa para revisar el detalle."
+    >
+      <DCArtboard id="inicio" label="Inicio" width={1240} height={900}>
+        <PagePreview src="pages/inicio.html" badge="Página principal" badgeColor="#f15a29" />
+      </DCArtboard>
+      <DCArtboard id="servicios" label="Servicios" width={1240} height={900}>
+        <PagePreview src="pages/servicios.html" badge="Servicios" />
+      </DCArtboard>
+      <DCArtboard id="equipo" label="Equipo" width={1240} height={900}>
+        <PagePreview src="pages/equipo.html" badge="Equipo" />
+      </DCArtboard>
+      <DCArtboard id="contacto" label="Contacto" width={1240} height={900}>
+        <PagePreview src="pages/contacto.html" badge="Contacto" />
+      </DCArtboard>
+    </DCSection>
+
+    <DCSection
+      id="heroes"
+      title="Variaciones del Hero"
+      subtitle="Tres direcciones diferentes para la apertura de la portada. Misma marca, distinto tono."
+    >
+      <DCArtboard id="hero-a" label="A · Editorial split (actual)" width={1240} height={780}>
+        <Frame src="variations/hero-a.html" />
+      </DCArtboard>
+      <DCArtboard id="hero-b" label="B · Full-bleed naranja + reserva" width={1240} height={780}>
+        <Frame src="variations/hero-b.html" />
+      </DCArtboard>
+      <DCArtboard id="hero-c" label="C · Magazine editorial" width={1240} height={780}>
+        <Frame src="variations/hero-c.html" />
+      </DCArtboard>
+    </DCSection>
+
+    <DCPostIt x={60} y={-100} rotation={-2}>
+      Recomendación: usa <b>A</b> como portada principal (vive en inicio.html); <b>B</b> funciona como landing de campaña con reserva inline; <b>C</b> para una página "Nuestra historia".
+    </DCPostIt>
+  </DesignCanvas>
+);
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

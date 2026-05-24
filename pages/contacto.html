@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contacto — Clínicas de Ortodoncia de Panamá</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/styles.css" />
+<style>
+  /* Hero contacto */
+  .contact-hero { padding: 72px 0 56px; position: relative; overflow: hidden; }
+  .contact-hero .dot-a { position: absolute; width: 80px; height: 80px; border-radius: 50%; background: var(--orange); top: 80px; right: 6%; opacity: .12; }
+  .contact-hero .dot-b { position: absolute; width: 40px; height: 40px; border-radius: 50%; background: var(--sun); bottom: 40px; left: 6%; }
+  .contact-hero h1 { font-size: clamp(48px, 6vw, 80px); letter-spacing: -0.035em; max-width: 18ch; }
+  .contact-hero h1 .accent { color: var(--orange); font-style: italic; font-weight: 400; }
+  .contact-hero .lede { margin-top: 22px; font-size: 19px; max-width: 56ch; }
+
+  /* Layout principal */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 56px;
+    align-items: start;
+    padding-bottom: 96px;
+  }
+
+  /* Formulario */
+  .form-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--r-xl);
+    padding: 40px;
+    box-shadow: var(--shadow-sm);
+  }
+  .form-card h2 { font-size: 28px; letter-spacing: -0.02em; }
+  .form-card .form-sub { color: var(--muted); font-size: 15px; margin-top: 8px; }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .field {
+    display: flex; flex-direction: column;
+    margin-top: 18px;
+  }
+  .field label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .field label .req { color: var(--orange); margin-left: 4px; }
+  .field input,
+  .field select,
+  .field textarea {
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: 14px 16px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink);
+    background: var(--cream);
+    transition: border-color .15s, background .15s;
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--indigo);
+    background: var(--white);
+  }
+  .field textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  /* Chips selector (servicio + sucursal) */
+  .chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip-group input { display: none; }
+  .chip-group label {
+    margin: 0;
+    padding: 10px 16px;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: var(--r-pill);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 14px;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--ink);
+    transition: background .15s, border-color .15s, color .15s;
+  }
+  .chip-group label:hover { border-color: var(--indigo); }
+  .chip-group input:checked + label {
+    background: var(--indigo);
+    color: var(--white);
+    border-color: var(--indigo);
+  }
+
+  /* Time slots */
+  .slots {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .slots input { display: none; }
+  .slots label {
+    margin: 0;
+    padding: 12px 8px;
+    text-align: center;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink);
+    cursor: pointer;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    transition: all .15s;
+  }
+  .slots input:checked + label {
+    background: var(--orange);
+    color: var(--white);
+    border-color: var(--orange);
+  }
+  .slots label:hover { border-color: var(--orange); }
+
+  .form-actions {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .form-actions .note {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+  }
+
+  /* Side panel */
+  .side { display: grid; gap: 16px; }
+  .side-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 24px 26px;
+  }
+  .side-card.indigo { background: var(--indigo); color: var(--white); border-color: var(--indigo); }
+  .side-card.orange { background: var(--orange); color: var(--white); border-color: var(--orange); }
+
+  .side-card .eyebrow { margin-bottom: 10px; }
+  .side-card.indigo .eyebrow { color: var(--sun); }
+  .side-card.orange .eyebrow { color: rgba(255,255,255,.9); }
+
+  .side-card h3 { font-size: 20px; letter-spacing: -0.015em; }
+  .side-card.indigo h3,
+  .side-card.orange h3 { color: var(--white); }
+  .side-card p { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
+  .side-card.indigo p { color: rgba(255,255,255,.8); }
+  .side-card.orange p { color: rgba(255,255,255,.85); }
+
+  .channel {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: inherit;
+  }
+  .channel:last-child { border-bottom: 0; padding-bottom: 0; }
+  .channel:first-child { padding-top: 0; }
+  .channel .ic {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: var(--orange-soft);
+    color: var(--orange-deep);
+    display: grid; place-items: center;
+  }
+  .channel.indigo-ic .ic { background: var(--indigo-soft); color: var(--indigo); }
+  .channel.sun-ic .ic { background: #fdf2cc; color: #8a6a00; }
+  .channel .lbl {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .channel .val {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--ink);
+    margin-top: 2px;
+  }
+  .channel .arrow { color: var(--muted); }
+
+  /* Sucursales con mapa */
+  .branches-section {
+    padding: 96px 0;
+    background: var(--cream-2);
+    border-top: 1px solid var(--line);
+  }
+  .branch-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .branch-tabs button {
+    border: 1px solid var(--line);
+    background: var(--white);
+    border-radius: var(--r-pill);
+    padding: 10px 18px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .branch-tabs button:hover { border-color: var(--indigo); }
+  .branch-tabs button.active {
+    background: var(--indigo);
+    color: var(--white);
+    border-color: var(--indigo);
+  }
+
+  .branch-content {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 24px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+  }
+  .branch-map {
+    position: relative;
+    aspect-ratio: 4/3;
+    background: var(--cream-2);
+  }
+  .branch-map .map-pin {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -100%);
+  }
+  .branch-map .pin {
+    width: 56px; height: 56px;
+    background: var(--orange);
+    border-radius: 50% 50% 50% 8px;
+    transform: rotate(-45deg);
+    box-shadow: 0 16px 32px -10px rgba(241,90,41,.5);
+    display: grid; place-items: center;
+  }
+  .branch-map .pin::after {
+    content: "";
+    width: 20px; height: 20px;
+    background: var(--white);
+    border-radius: 50%;
+    transform: rotate(45deg);
+  }
+
+  .branch-info { padding: 36px; display: flex; flex-direction: column; gap: 18px; }
+  .branch-info h3 { font-size: 28px; letter-spacing: -0.02em; }
+  .branch-info .info-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+  .branch-info .info-row:last-child { border-bottom: 0; }
+  .branch-info .info-lbl {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 3px;
+  }
+  .branch-info .info-val { font-size: 15px; color: var(--ink); }
+  .branch-info .info-val strong { font-family: var(--font-display); font-weight: 500; }
+
+  /* Estado abierto */
+  .status-open {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: var(--r-pill);
+    background: rgba(46, 160, 67, 0.12);
+    color: #2ea043;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .status-open::before {
+    content: ""; width: 8px; height: 8px;
+    border-radius: 50%; background: #2ea043;
+    box-shadow: 0 0 0 0 rgba(46,160,67,.6);
+    animation: pulse-green 2s infinite;
+  }
+  @keyframes pulse-green {
+    0%   { box-shadow: 0 0 0 0 rgba(46,160,67,.5); }
+    70%  { box-shadow: 0 0 0 8px rgba(46,160,67,0); }
+    100% { box-shadow: 0 0 0 0 rgba(46,160,67,0); }
+  }
+
+  @media (max-width: 980px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .branch-content { grid-template-columns: 1fr; }
+    .branch-map { aspect-ratio: 4/3; }
+  }
+  @media (max-width: 580px) {
+    .form-card { padding: 28px; }
+    .field-row { grid-template-columns: 1fr; }
+    .slots { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header --------------------------------------------------- -->
+<header class="site-header">
+  <div class="container nav">
+    <a class="logo" href="inicio.html">
+      <span class="logo-mark"><span>CDO</span></span>
+      <span class="logo-text"><strong>Clínicas de Ortodoncia</strong><small>de Panamá</small></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="inicio.html">Inicio</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="equipo.html">Equipo</a></li>
+      <li><a href="contacto.html" class="active">Contacto</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="tel:+5070000000" class="nav-phone">+507 000-0000</a>
+      <a href="contacto.html" class="btn btn-primary">Agendar consulta <span class="arrow">→</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero ----------------------------------------------------- -->
+<section class="contact-hero">
+  <span class="dot-a"></span>
+  <span class="dot-b"></span>
+  <div class="container">
+    <div class="crumbs" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px;">
+      <a href="inicio.html" style="color: var(--muted); text-decoration: none;">Inicio</a> · Contacto
+    </div>
+    <h1>Tu primera consulta <span class="accent">es gratis</span>. Empezamos por una conversación.</h1>
+    <p class="lede">Llena el formulario y te llamamos en menos de 24 horas hábiles para confirmar. Si prefieres, también puedes escribirnos por WhatsApp.</p>
+  </div>
+</section>
+
+<!-- Contacto grid ------------------------------------------- -->
+<section class="container">
+  <div class="contact-grid">
+
+    <!-- Formulario -->
+    <form class="form-card" onsubmit="event.preventDefault(); this.querySelector('.success').hidden=false;">
+      <div class="eyebrow">Agendar consulta gratuita</div>
+      <h2 style="margin-top: 8px;">Cuéntanos un poco de ti.</h2>
+      <p class="form-sub">Toma 30 segundos. Después de enviarlo, te confirmamos cita por WhatsApp.</p>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="f-name">Nombre completo <span class="req">*</span></label>
+          <input id="f-name" type="text" placeholder="Ana Lucía Pérez" required />
+        </div>
+        <div class="field">
+          <label for="f-phone">Teléfono / WhatsApp <span class="req">*</span></label>
+          <input id="f-phone" type="tel" placeholder="6000-0000" required />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="f-email">Correo (opcional)</label>
+        <input id="f-email" type="email" placeholder="ana@correo.com" />
+      </div>
+
+      <div class="field">
+        <label>¿Qué servicio te interesa? <span class="req">*</span></label>
+        <div class="chip-group">
+          <input type="radio" name="svc" id="svc-1" checked /><label for="svc-1">Brackets</label>
+          <input type="radio" name="svc" id="svc-2" /><label for="svc-2">Limpieza</label>
+          <input type="radio" name="svc" id="svc-3" /><label for="svc-3">Blanqueamiento</label>
+          <input type="radio" name="svc" id="svc-4" /><label for="svc-4">No sé, quiero asesoría</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Sucursal preferida</label>
+        <div class="chip-group">
+          <input type="radio" name="suc" id="suc-1" checked /><label for="suc-1">Costa del Este</label>
+          <input type="radio" name="suc" id="suc-2" /><label for="suc-2">Albrook</label>
+          <input type="radio" name="suc" id="suc-3" /><label for="suc-3">Vía Argentina</label>
+          <input type="radio" name="suc" id="suc-4" /><label for="suc-4">La que tenga cita antes</label>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="f-date">Día que te gustaría</label>
+          <input id="f-date" type="date" />
+        </div>
+        <div class="field">
+          <label>Franja horaria</label>
+          <div class="slots">
+            <input type="radio" name="slot" id="s-1" /><label for="s-1">8–10</label>
+            <input type="radio" name="slot" id="s-2" checked /><label for="s-2">10–12</label>
+            <input type="radio" name="slot" id="s-3" /><label for="s-3">14–16</label>
+            <input type="radio" name="slot" id="s-4" /><label for="s-4">16–18</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="f-msg">¿Algo que quieras contarnos? (opcional)</label>
+        <textarea id="f-msg" placeholder="Soy paciente nuevo. Hace tiempo quiero arreglarme los dientes y..."></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Enviar solicitud <span class="arrow">→</span></button>
+        <span class="note">Tus datos se quedan con nosotros. Nunca los compartimos.</span>
+      </div>
+
+      <div class="success" hidden style="margin-top: 24px; padding: 18px 20px; background: rgba(46,160,67,.08); border: 1px solid rgba(46,160,67,.25); border-radius: var(--r-md); color: #2ea043; font-size: 14px;">
+        ¡Gracias! Recibimos tu solicitud. Te escribimos a tu WhatsApp en menos de 24 horas hábiles.
+      </div>
+    </form>
+
+    <!-- Side panel -->
+    <aside class="side">
+      <div class="side-card orange">
+        <div class="eyebrow">WhatsApp</div>
+        <h3>¿Prefieres escribirnos directo?</h3>
+        <p>Tenemos una persona real respondiendo de lunes a sábado, 8:00 a 20:00.</p>
+        <a class="btn btn-white" href="https://wa.me/5076000000" style="background: var(--white); color: var(--orange-deep); margin-top: 18px; box-shadow: 0 6px 0 0 rgba(0,0,0,.18);">Abrir WhatsApp <span class="arrow">→</span></a>
+      </div>
+
+      <div class="side-card">
+        <div class="eyebrow">Otros canales</div>
+        <a class="channel" href="tel:+5070000000">
+          <div class="ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.93.36 1.84.7 2.71a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.37-1.27a2 2 0 0 1 2.11-.45 12 12 0 0 0 2.71.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="lbl">Llamada directa</div>
+            <div class="val">+507 000-0000</div>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+        <a class="channel indigo-ic" href="mailto:hola@ortodonciapanama.com">
+          <div class="ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+          </div>
+          <div>
+            <div class="lbl">Correo</div>
+            <div class="val">hola@ortodonciapanama.com</div>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+        <a class="channel sun-ic" href="#">
+          <div class="ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
+          </div>
+          <div>
+            <div class="lbl">Síguenos</div>
+            <div class="val">@ortodonciapanama</div>
+          </div>
+          <div class="arrow">→</div>
+        </a>
+      </div>
+
+      <div class="side-card indigo">
+        <div class="eyebrow">Emergencias</div>
+        <h3>¿Bracket roto o dolor fuera de horario?</h3>
+        <p>Llama al número de guardia. Atendemos pacientes activos las 24 horas, los 7 días.</p>
+        <a class="btn" href="tel:+5076000001" style="background: var(--sun); color: var(--indigo-deep); margin-top: 18px;">Línea de guardia <span class="arrow">→</span></a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- Sucursales ----------------------------------------------- -->
+<section class="branches-section">
+  <div class="container">
+    <div class="eyebrow">Sucursales</div>
+    <h2 class="h-1" style="margin-top: 12px; margin-bottom: 32px;">Tres clínicas. Una atención.</h2>
+
+    <div class="branch-tabs" role="tablist">
+      <button class="active" data-tab="0">Costa del Este</button>
+      <button data-tab="1">Albrook</button>
+      <button data-tab="2">Vía Argentina</button>
+    </div>
+
+    <div class="branch-content" id="branch-content">
+      <div class="branch-map">
+        <svg class="map-svg" viewBox="0 0 600 450" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width: 100%; height: 100%;">
+          <defs>
+            <pattern id="grid2" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#d8d0c0" stroke-width="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="600" height="450" fill="#f4efe6"/>
+          <rect width="600" height="450" fill="url(#grid2)"/>
+          <path d="M0 200 Q 200 180 320 240 T 600 220" stroke="#e8dec9" stroke-width="22" fill="none"/>
+          <path d="M120 0 Q 140 200 200 300 T 280 450" stroke="#e8dec9" stroke-width="14" fill="none"/>
+          <path d="M400 0 L 380 200 L 440 300 L 420 450" stroke="#e8dec9" stroke-width="10" fill="none"/>
+          <path d="M0 350 L 600 380" stroke="#e8dec9" stroke-width="18" fill="none"/>
+          <circle cx="120" cy="120" r="48" fill="#dfe9d3"/>
+          <rect x="440" y="320" width="120" height="80" rx="12" fill="#dfe9d3"/>
+          <path d="M0 420 Q 150 400 300 410 T 600 405 L 600 450 L 0 450 Z" fill="#cfe3ec"/>
+        </svg>
+        <div class="map-pin"><div class="pin"></div></div>
+      </div>
+
+      <div class="branch-info">
+        <div class="row row-between" style="align-items: flex-start;">
+          <div>
+            <div class="eyebrow" style="color: var(--orange);">Sucursal 01</div>
+            <h3 id="b-name">Costa del Este</h3>
+          </div>
+          <span class="status-open">Abierto ahora</span>
+        </div>
+
+        <div>
+          <div class="info-row">
+            <div class="info-lbl">Dirección</div>
+            <div class="info-val" id="b-addr"><strong>Town Center, local 312</strong><br/>Av. Paseo del Mar, Costa del Este<br/>Ciudad de Panamá</div>
+          </div>
+          <div class="info-row">
+            <div class="info-lbl">Horario</div>
+            <div class="info-val" id="b-hours"><strong>L–V</strong> 8:00 – 19:00<br/><strong>Sáb</strong> 9:00 – 14:00<br/><strong>Dom</strong> cerrado</div>
+          </div>
+          <div class="info-row">
+            <div class="info-lbl">Teléfono</div>
+            <div class="info-val" id="b-phone"><strong>+507 000-0001</strong></div>
+          </div>
+          <div class="info-row">
+            <div class="info-lbl">Parqueo</div>
+            <div class="info-val" id="b-parking">Sí · sótano del centro comercial, sellado por la recepción</div>
+          </div>
+        </div>
+
+        <div class="row" style="gap: 10px; flex-wrap: wrap; margin-top: 8px;">
+          <a class="btn btn-primary" href="#">Cómo llegar <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" href="tel:+5070000001">Llamar a esta sede</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer --------------------------------------------------- -->
+<footer class="site-footer">
+  <div class="container">
+    <div>
+      <a class="logo" href="inicio.html" style="color: var(--white);">
+        <span class="logo-mark" style="background: var(--white); color: var(--indigo);"><span>CDO</span></span>
+        <span class="logo-text">
+          <strong style="color: var(--white);">Clínicas de Ortodoncia</strong>
+          <small style="color: rgba(255,255,255,.6);">de Panamá</small>
+        </span>
+      </a>
+      <p style="margin-top: 24px; color: rgba(255,255,255,.7); font-size: 14px; max-width: 32ch;">Cuidando sonrisas panameñas desde 2003. Especialistas en ortodoncia para toda la familia.</p>
+    </div>
+    <div><h4>Sitio</h4><ul><li><a href="inicio.html">Inicio</a></li><li><a href="servicios.html">Servicios</a></li><li><a href="equipo.html">Equipo</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+    <div><h4>Sucursales</h4><ul><li>Costa del Este</li><li>Albrook</li><li>Vía Argentina</li></ul></div>
+    <div><h4>Contacto</h4><ul><li>+507 000-0000</li><li>hola@ortodonciapanama.com</li><li>WhatsApp 6000-0000</li></ul></div>
+    <div class="legal">
+      <span>© 2026 Clínicas de Ortodoncia de Panamá. Todos los derechos reservados.</span>
+      <span>Hecho con cariño en la Ciudad de Panamá</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Tabs de sucursales
+  const branches = [
+    {
+      eyebrow: 'Sucursal 01',
+      name: 'Costa del Este',
+      addr: '<strong>Town Center, local 312</strong><br/>Av. Paseo del Mar, Costa del Este<br/>Ciudad de Panamá',
+      hours: '<strong>L–V</strong> 8:00 – 19:00<br/><strong>Sáb</strong> 9:00 – 14:00<br/><strong>Dom</strong> cerrado',
+      phone: '<strong>+507 000-0001</strong>',
+      parking: 'Sí · sótano del centro comercial, sellado por la recepción'
+    },
+    {
+      eyebrow: 'Sucursal 02',
+      name: 'Albrook Mall',
+      addr: '<strong>Albrook Mall, local C-118</strong><br/>Pasillo del coral<br/>Ciudad de Panamá',
+      hours: '<strong>L–S</strong> 9:00 – 20:00<br/><strong>Dom</strong> 11:00 – 18:00',
+      phone: '<strong>+507 000-0002</strong>',
+      parking: 'Sí · parqueo gratuito del mall, sin validación necesaria'
+    },
+    {
+      eyebrow: 'Sucursal 03',
+      name: 'Vía Argentina',
+      addr: '<strong>Edif. Quartz, planta baja</strong><br/>Calle 47, El Cangrejo<br/>Ciudad de Panamá',
+      hours: '<strong>L–V</strong> 9:00 – 18:00<br/><strong>Sáb</strong> 9:00 – 13:00<br/><strong>Dom</strong> cerrado',
+      phone: '<strong>+507 000-0003</strong>',
+      parking: 'Limitado · 6 espacios + parqueo público a media cuadra'
+    }
+  ];
+
+  const tabs = document.querySelectorAll('.branch-tabs button');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const i = parseInt(tab.dataset.tab, 10);
+      const b = branches[i];
+      const content = document.querySelector('.branch-info');
+      content.querySelector('.eyebrow').textContent = b.eyebrow;
+      content.querySelector('#b-name').textContent = b.name;
+      content.querySelector('#b-addr').innerHTML = b.addr;
+      content.querySelector('#b-hours').innerHTML = b.hours;
+      content.querySelector('#b-phone').innerHTML = b.phone;
+      content.querySelector('#b-parking').textContent = b.parking;
+    });
+  });
+</script>
+
+</body>
+</html>

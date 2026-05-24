@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Clínicas de Ortodoncia de Panamá — Sonrisas que cambian vidas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css" />
+<style>
+  /* --- Hero --- */
+  .hero { position: relative; padding-top: 56px; padding-bottom: 80px; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+  .hero-eyebrow .pulse {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--orange);
+    box-shadow: 0 0 0 0 rgba(241,90,41,.6);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(241,90,41,.5); }
+    70%  { box-shadow: 0 0 0 12px rgba(241,90,41,0); }
+    100% { box-shadow: 0 0 0 0 rgba(241,90,41,0); }
+  }
+  .hero h1 .accent { color: var(--orange); font-style: italic; font-weight: 400; }
+  .hero h1 .underline { position: relative; display: inline-block; }
+  .hero h1 .underline::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -2px;
+    height: 6px; background: var(--sun); border-radius: 4px; z-index: -1;
+  }
+  .hero-cta { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+  .hero-stats {
+    margin-top: 56px; display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 32px; padding-top: 28px; border-top: 1px solid var(--line);
+  }
+  .hero-stats .n { font-family: var(--font-display); font-size: 36px; font-weight: 600; letter-spacing: -0.03em; color: var(--indigo); }
+  .hero-stats .lbl { font-size: 13px; color: var(--muted); text-wrap: balance; }
+  .hero-art { position: relative; aspect-ratio: 5/6; border-radius: var(--r-xl); overflow: hidden; background: var(--indigo); }
+  .hero-art .img-ph {
+    position: absolute; inset: 0; aspect-ratio: auto; border-radius: 0;
+    background: repeating-linear-gradient(135deg, rgba(255,255,255,.06) 0 18px, rgba(255,255,255,.02) 18px 36px), var(--indigo);
+    color: rgba(255,255,255,.7);
+  }
+  .hero-art .img-ph::after { border-color: rgba(255,255,255,.18); }
+  .float-chip {
+    position: absolute; background: var(--white); border-radius: var(--r-lg);
+    padding: 16px 18px; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 14px; z-index: 2;
+  }
+  .float-chip .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--orange-soft); display: grid; place-items: center; color: var(--orange-deep); font-weight: 600; font-family: var(--font-display); }
+  .float-chip .text { display: flex; flex-direction: column; line-height: 1.2; }
+  .float-chip .text strong { font-size: 14px; }
+  .float-chip .text small { font-size: 12px; color: var(--muted); }
+  .chip-rating { bottom: 32px; left: -28px; }
+  .chip-rating .stars { color: var(--sun); letter-spacing: 2px; font-size: 14px; }
+  .chip-booked { top: 48px; right: -28px; }
+  .hero .dot-1 { width: 120px; height: 120px; background: var(--orange); top: -40px; right: 40%; opacity: .12; }
+  .hero .dot-2 { width: 70px; height: 70px; background: var(--sun); bottom: 20%; left: -10px; }
+  .hero .dot-3 { width: 40px; height: 40px; background: var(--sky); top: 12%; right: -6px; }
+
+  /* Pleca de confianza */
+  .trust-strip { border-block: 1px solid var(--line); padding-block: 22px; background: var(--cream-2); }
+  .trust-strip .container { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px; }
+  .trust-strip .label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .trust-strip .badges { display: flex; flex-wrap: wrap; gap: 28px; align-items: center; }
+  .badge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 500; color: var(--indigo); font-size: 14px; }
+  .badge .b-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* --- Servicios --- */
+  .services-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 48px; }
+  .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .service-card { position: relative; background: var(--white); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 28px; display: flex; flex-direction: column; gap: 16px; transition: transform .2s ease, box-shadow .2s ease; }
+  .service-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .service-card .num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; color: var(--muted); }
+  .service-card .icon-wrap { width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; background: var(--orange-soft); color: var(--orange-deep); }
+  .service-card.indigo .icon-wrap { background: var(--indigo-soft); color: var(--indigo); }
+  .service-card.sun .icon-wrap { background: #fdf2cc; color: #8a6a00; }
+  .service-card h3 { font-size: 22px; }
+  .service-card p { color: var(--muted); margin: 0; font-size: 15px; }
+  .service-card .price { margin-top: auto; padding-top: 18px; border-top: 1px dashed var(--line); display: flex; align-items: baseline; justify-content: space-between; }
+  .service-card .price .p { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--indigo); }
+  .service-card .price small { color: var(--muted); font-size: 12px; }
+  .service-card .link { text-decoration: none; font-size: 13px; font-weight: 500; color: var(--orange); }
+
+  /* --- Pasos / proceso --- */
+  .process { background: var(--indigo); color: var(--white); border-radius: var(--r-xl); padding: 64px; margin-bottom: -120px; position: relative; overflow: hidden; }
+  .process::before { content: ""; position: absolute; width: 280px; height: 280px; background: rgba(241,90,41,.18); border-radius: 50%; right: -80px; top: -80px; }
+  .process::after { content: ""; position: absolute; width: 180px; height: 180px; background: rgba(245,197,24,.16); border-radius: 50%; left: -40px; bottom: -40px; }
+  .process > * { position: relative; z-index: 1; }
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 40px; }
+  .step { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: var(--r-lg); padding: 24px; }
+  .step .step-n { font-family: var(--font-display); font-size: 44px; font-weight: 600; color: var(--sun); letter-spacing: -0.04em; line-height: 1; }
+  .step h4 { margin-top: 18px; font-size: 18px; color: var(--white); }
+  .step p { margin: 8px 0 0; font-size: 14px; color: rgba(255,255,255,.72); }
+
+  /* --- Equipo preview --- */
+  .equipo { background: var(--cream); padding-top: 220px; }
+  .equipo-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 32px; align-items: stretch; }
+  .equipo .lead-card { background: var(--cream-2); border-radius: var(--r-xl); padding: 44px; display: flex; flex-direction: column; justify-content: space-between; }
+  .equipo .lead-card .quote-mark { font-family: var(--font-display); font-size: 80px; line-height: 0.6; color: var(--orange); }
+  .equipo .lead-card blockquote { margin: 18px 0 0; font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.25; }
+  .equipo .lead-card cite { margin-top: 28px; display: block; font-style: normal; font-size: 14px; color: var(--muted); }
+  .equipo .lead-card cite strong { display: block; color: var(--ink); font-weight: 500; margin-bottom: 2px; }
+  .doc-card { background: var(--white); border-radius: var(--r-xl); border: 1px solid var(--line); overflow: hidden; display: flex; flex-direction: column; }
+  .doc-card .img-ph { border-radius: 0; aspect-ratio: 4/5; border-bottom: 1px solid var(--line); }
+  .doc-card .img-ph::after { inset: 14px; }
+  .doc-card .body { padding: 22px; }
+  .doc-card h4 { font-size: 18px; }
+  .doc-card .role { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); margin-top: 4px; }
+  .doc-card p { color: var(--muted); font-size: 13px; margin: 12px 0 0; }
+
+  /* --- Ubicación --- */
+  .ubicacion-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; align-items: stretch; }
+  .map-card { border-radius: var(--r-xl); overflow: hidden; background: var(--cream-2); aspect-ratio: 4/3; position: relative; border: 1px solid var(--line); }
+  .map-svg { width: 100%; height: 100%; display: block; }
+  .map-pin { position: absolute; top: 46%; left: 56%; transform: translate(-50%, -100%); }
+  .map-pin .pin { width: 44px; height: 44px; background: var(--orange); border-radius: 50% 50% 50% 6px; transform: rotate(-45deg); box-shadow: 0 12px 24px -8px rgba(241,90,41,.6); display: grid; place-items: center; }
+  .map-pin .pin::after { content: ""; width: 14px; height: 14px; background: var(--white); border-radius: 50%; transform: rotate(45deg); }
+  .branch-list { display: grid; gap: 12px; }
+  .branch { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 22px 24px; display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; }
+  .branch .b-num { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--indigo); width: 40px; height: 40px; background: var(--indigo-soft); border-radius: 12px; display: grid; place-items: center; }
+  .branch h4 { font-size: 17px; }
+  .branch p { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+  .branch .hr { font-family: var(--font-mono); font-size: 12px; color: var(--ink); }
+  .branch.active { background: var(--indigo); color: var(--white); border-color: var(--indigo); }
+  .branch.active .b-num { background: rgba(255,255,255,.14); color: var(--sun); }
+  .branch.active p { color: rgba(255,255,255,.7); }
+  .branch.active .hr { color: var(--sun); }
+
+  /* --- CTA final --- */
+  .final-cta { background: var(--orange); color: var(--white); border-radius: var(--r-xl); padding: 72px; position: relative; overflow: hidden; display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; }
+  .final-cta h2 { color: var(--white); font-size: clamp(36px, 4.5vw, 60px); letter-spacing: -0.03em; }
+  .final-cta .sub { color: rgba(255,255,255,.85); font-size: 17px; margin-top: 16px; }
+  .final-cta .btn-white { background: var(--white); color: var(--orange-deep); box-shadow: 0 6px 0 0 rgba(0,0,0,.2); }
+  .final-cta .form-quick { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); border-radius: var(--r-lg); padding: 24px; }
+  .final-cta .form-quick label { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,.75); margin-bottom: 6px; }
+  .final-cta .form-quick input { width: 100%; background: rgba(255,255,255,.95); border: 0; border-radius: 10px; padding: 14px 16px; font-family: var(--font-body); font-size: 15px; color: var(--ink); margin-bottom: 14px; }
+  .final-cta .form-quick .btn { width: 100%; justify-content: center; margin-top: 4px; }
+  .final-cta::before { content: ""; position: absolute; width: 380px; height: 380px; background: rgba(255,255,255,.08); border-radius: 50%; bottom: -160px; left: -120px; }
+  .final-cta::after { content: ""; position: absolute; width: 240px; height: 240px; background: rgba(42,38,128,.18); border-radius: 50%; top: -100px; right: 24%; }
+  .final-cta > * { position: relative; z-index: 1; }
+
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .service-grid { grid-template-columns: 1fr 1fr; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .process { padding: 40px; }
+    .equipo-grid { grid-template-columns: 1fr; }
+    .ubicacion-grid { grid-template-columns: 1fr; }
+    .final-cta { grid-template-columns: 1fr; padding: 48px; }
+    .services-head { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 580px) {
+    .service-grid { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .float-chip { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<%- include('partials/nav', { active: 'inicio' }) %>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="dot dot-1"></span>
+  <span class="dot dot-2"></span>
+  <span class="dot dot-3"></span>
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-eyebrow eyebrow"><span class="pulse"></span> Consulta inicial gratuita · 3 sucursales</div>
+      <h1 class="h-display">
+        Sonrisas que <span class="accent">cambian</span><br/>
+        vidas, <span class="underline">a tu ritmo</span>.
+      </h1>
+      <p class="lede" style="margin-top:22px;">
+        Más de 20 años cuidando la sonrisa de las familias panameñas. Ortodoncia, limpieza y blanqueamiento con un equipo cercano y planes de pago a tu medida.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="/contacto">Agendar consulta gratis <span class="arrow">→</span></a>
+        <a class="btn btn-ghost" href="/servicios">Ver servicios</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="n">12,400+</div><div class="lbl">Sonrisas tratadas desde 2003</div></div>
+        <div><div class="n">4.9★</div><div class="lbl">Calificación promedio de pacientes</div></div>
+        <div><div class="n">3</div><div class="lbl">Sucursales en Ciudad de Panamá</div></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="img-ph"><span>Foto · paciente sonriendo<br/>retrato vertical 5:6</span></div>
+      <div class="float-chip chip-rating">
+        <div class="avatar">A</div>
+        <div class="text"><div class="stars">★★★★★</div><small>"Me trataron como familia." — Andrea</small></div>
+      </div>
+      <div class="float-chip chip-booked">
+        <div class="avatar" style="background:var(--indigo-soft); color:var(--indigo);">✓</div>
+        <div class="text"><strong>23 citas hoy</strong><small>Disponibilidad esta semana</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pleca de confianza -->
+<div class="trust-strip">
+  <div class="container">
+    <div class="label">Avalados por</div>
+    <div class="badges">
+      <span class="badge"><span class="b-dot" style="background:var(--orange);"></span> Asoc. Odontológica de Panamá</span>
+      <span class="badge"><span class="b-dot" style="background:var(--indigo);"></span> Invisalign Provider</span>
+      <span class="badge"><span class="b-dot" style="background:var(--sun);"></span> Damon System Certified</span>
+      <span class="badge"><span class="b-dot" style="background:var(--sky);"></span> ISO 9001</span>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<section class="section">
+  <div class="container">
+    <div class="services-head">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 14px;">Nuestros servicios</div>
+        <h2 class="h-1">Tres servicios.<br/>Una atención que te trata como familia.</h2>
+      </div>
+      <p class="lede">Empezamos con una evaluación gratuita para entender tu sonrisa, tus tiempos y tu presupuesto. Después armamos un plan que tenga sentido para ti.</p>
+    </div>
+    <div class="service-grid">
+      <article class="service-card">
+        <div class="row row-between">
+          <div class="icon-wrap" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h22M5 20h22"/><rect x="9" y="9" width="5" height="14" rx="1.5"/><rect x="18" y="9" width="5" height="14" rx="1.5"/></svg>
+          </div>
+          <span class="num">01 / 03</span>
+        </div>
+        <h3>Ortodoncia con brackets</h3>
+        <p>Brackets metálicos tradicionales con tecnología Damon — menos visitas, resultados más predecibles. Plan personalizado de 12 a 24 meses.</p>
+        <div class="price">
+          <div><div class="p">desde $45<small>/mes</small></div><small>Cuota fija sin intereses</small></div>
+          <a class="link" href="/servicios">Conocer más →</a>
+        </div>
+      </article>
+      <article class="service-card indigo">
+        <div class="row row-between">
+          <div class="icon-wrap" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 5c-3 0-5 2-7 2s-4-1-4 2c0 6 2 14 5 17 2 2 4-3 6-3s4 5 6 3c3-3 5-11 5-17 0-3-2-2-4-2s-4-2-7-2z"/><path d="M20 12l-2 2-1-1"/></svg>
+          </div>
+          <span class="num">02 / 03</span>
+        </div>
+        <h3>Limpieza dental profunda</h3>
+        <p>Profilaxis, raspado y pulido con ultrasonido. Una hora, sin dolor, y sales con esa sensación de dientes recién estrenados.</p>
+        <div class="price">
+          <div><div class="p">$60<small> sesión</small></div><small>Recomendada cada 6 meses</small></div>
+          <a class="link" href="/servicios">Conocer más →</a>
+        </div>
+      </article>
+      <article class="service-card sun">
+        <div class="row row-between">
+          <div class="icon-wrap" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="6"/><path d="M16 3v3M16 26v3M3 16h3M26 16h3M6 6l2 2M24 24l2 2M6 26l2-2M24 8l2-2"/></svg>
+          </div>
+          <span class="num">03 / 03</span>
+        </div>
+        <h3>Blanqueamiento profesional</h3>
+        <p>Sistema de luz LED que aclara hasta 8 tonos en una sola visita. Cuidamos el esmalte y respetamos la sensibilidad de tus dientes.</p>
+        <div class="price">
+          <div><div class="p">$180<small> sesión</small></div><small>Incluye férula de mantenimiento</small></div>
+          <a class="link" href="/servicios">Conocer más →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="process">
+      <div class="row row-between" style="flex-wrap:wrap; gap:24px;">
+        <div>
+          <div class="eyebrow" style="color: var(--sun);">Cómo trabajamos</div>
+          <h2 class="h-1" style="color: var(--white); margin-top: 12px; max-width: 22ch;">Del primer hola a tu sonrisa final, en cuatro pasos.</h2>
+        </div>
+        <a class="btn btn-primary" href="/contacto">Empezar hoy <span class="arrow">→</span></a>
+      </div>
+      <div class="process-grid">
+        <div class="step"><div class="step-n">01</div><h4>Cita de evaluación</h4><p>Gratuita. Conversamos, revisamos tu boca y aclaramos todas tus dudas.</p></div>
+        <div class="step"><div class="step-n">02</div><h4>Plan a tu medida</h4><p>Te entregamos un plan claro: tiempo estimado, opciones y cuotas.</p></div>
+        <div class="step"><div class="step-n">03</div><h4>Tratamiento</h4><p>Citas mensuales relajadas. Si algo aprieta, nos avisas — estamos a un mensaje.</p></div>
+        <div class="step"><div class="step-n">04</div><h4>Sonrisa final</h4><p>Retenedor personalizado y seguimiento gratuito durante un año.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPO -->
+<section class="section equipo">
+  <div class="container">
+    <div class="row row-between" style="margin-bottom: 36px; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 14px;">Tu equipo</div>
+        <h2 class="h-1" style="max-width: 18ch;">Doctores que escuchan, no solo prescriben.</h2>
+      </div>
+      <a class="btn btn-ghost" href="/equipo">Conoce a todo el equipo <span class="arrow">→</span></a>
+    </div>
+    <div class="equipo-grid">
+      <div class="lead-card">
+        <div>
+          <div class="quote-mark">"</div>
+          <blockquote>Cada sonrisa tiene su propia historia. Mi trabajo es escucharla primero, y diseñar el tratamiento después.</blockquote>
+        </div>
+        <cite><strong>Dra. María Elena Quirós</strong>Directora médica · Ortodoncista certificada (Univ. de Panamá, posgrado USP Brasil)</cite>
+      </div>
+      <article class="doc-card">
+        <div class="img-ph"><span>Retrato<br/>Dr. Carlos Mendoza</span></div>
+        <div class="body"><h4>Dr. Carlos Mendoza</h4><div class="role">Ortodoncia adultos</div><p>15 años. Especialista en Invisalign y casos complejos. Fanático del café y del jazz.</p></div>
+      </article>
+      <article class="doc-card">
+        <div class="img-ph"><span>Retrato<br/>Dra. Ana Lucía Pérez</span></div>
+        <div class="body"><h4>Dra. Ana Lucía Pérez</h4><div class="role">Odontopediatría</div><p>Sabe hacer reír a los niños mientras les pone aparatos. Mamá de tres.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- UBICACIÓN -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="row row-between" style="margin-bottom: 36px; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 14px;">Encuéntranos</div>
+        <h2 class="h-1">Tres sucursales en la ciudad.</h2>
+      </div>
+      <a class="btn btn-ghost" href="/contacto">Ver direcciones completas <span class="arrow">→</span></a>
+    </div>
+    <div class="ubicacion-grid">
+      <div class="map-card">
+        <svg class="map-svg" viewBox="0 0 600 450" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#d8d0c0" stroke-width="0.5"/></pattern></defs>
+          <rect width="600" height="450" fill="#f4efe6"/><rect width="600" height="450" fill="url(#grid)"/>
+          <path d="M0 200 Q 200 180 320 240 T 600 220" stroke="#e8dec9" stroke-width="22" fill="none"/>
+          <path d="M120 0 Q 140 200 200 300 T 280 450" stroke="#e8dec9" stroke-width="14" fill="none"/>
+          <path d="M400 0 L 380 200 L 440 300 L 420 450" stroke="#e8dec9" stroke-width="10" fill="none"/>
+          <path d="M0 350 L 600 380" stroke="#e8dec9" stroke-width="18" fill="none"/>
+          <circle cx="120" cy="120" r="48" fill="#dfe9d3"/><rect x="440" y="320" width="120" height="80" rx="12" fill="#dfe9d3"/>
+          <path d="M0 420 Q 150 400 300 410 T 600 405 L 600 450 L 0 450 Z" fill="#cfe3ec"/>
+          <g transform="translate(180 280)"><circle r="8" fill="#2a2680" opacity=".25"/><circle r="4" fill="#2a2680"/></g>
+          <g transform="translate(460 160)"><circle r="8" fill="#2a2680" opacity=".25"/><circle r="4" fill="#2a2680"/></g>
+        </svg>
+        <div class="map-pin"><div class="pin"></div></div>
+      </div>
+      <div class="branch-list">
+        <article class="branch active">
+          <div class="b-num">01</div>
+          <div><h4>Sucursal Costa del Este</h4><p>Town Center, local 312 · Ciudad de Panamá</p></div>
+          <div class="hr">L–V 8:00–19:00</div>
+        </article>
+        <article class="branch">
+          <div class="b-num">02</div>
+          <div><h4>Sucursal Albrook</h4><p>Albrook Mall, pasillo del coral · Local C-118</p></div>
+          <div class="hr">L–S 9:00–20:00</div>
+        </article>
+        <article class="branch">
+          <div class="b-num">03</div>
+          <div><h4>Sucursal Vía Argentina</h4><p>Edif. Quartz, planta baja · El Cangrejo</p></div>
+          <div class="hr">L–V 9:00–18:00</div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="final-cta">
+      <div>
+        <div class="eyebrow" style="color: rgba(255,255,255,.85); margin-bottom: 14px;">Tu próxima sonrisa</div>
+        <h2>La primera consulta corre por nuestra cuenta.</h2>
+        <p class="sub">Sin compromiso, sin letra chica. Si te animas, seguimos. Si no, te vas con un plan que entiendes.</p>
+        <div class="row" style="margin-top: 28px; gap: 12px; flex-wrap:wrap;">
+          <a class="btn btn-white" href="/contacto">Agendar gratis <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" style="background: rgba(255,255,255,.12); color: var(--white); border-color: rgba(255,255,255,.3);" href="tel:+5070000000">WhatsApp 6000-0000</a>
+        </div>
+      </div>
+      <form class="form-quick" action="/contacto" method="POST">
+        <label for="qf-name">Tu nombre</label>
+        <input id="qf-name" name="name" type="text" placeholder="Ana Lucía" />
+        <label for="qf-phone">Teléfono</label>
+        <input id="qf-phone" name="phone" type="tel" placeholder="6000-0000" />
+        <button class="btn btn-indigo" type="submit">Quiero mi cita <span class="arrow">→</span></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
